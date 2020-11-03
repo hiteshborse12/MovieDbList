@@ -15,9 +15,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setNavigationController()
+        self.setRootController()
         return true
     }
-
+    // Set root/first viwController
+    func setRootController() {
+        let listVc = MovieListViewController.loadFromNib()
+        CommonMethods.setRootController(rootVC: listVc)
+    }
+    func setNavigationController() {
+        // Set BarTintColor
+        UINavigationBar.appearance().barTintColor = .purpleTheme
+        // Set Tint Color
+        UINavigationBar.appearance().tintColor = .white
+        //Set Title Color
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17)
+        ]
+        UINavigationBar.appearance().titleTextAttributes = attrs
+        // Hide back Text
+        UIBarButtonItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
+    }
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -64,4 +84,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
