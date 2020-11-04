@@ -24,4 +24,8 @@ class CommonMethods {
             view.makeToast(messsage, duration: 3.0, position: .bottom, style: style)
         }
     }
+    
+    static func minutesToHoursMinutes (minutes : Int) -> (hours : Int , leftMinutes : Int) {
+        return (minutes / 60, (minutes % 60))
+    }
 }

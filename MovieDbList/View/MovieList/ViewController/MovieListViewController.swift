@@ -72,6 +72,9 @@ extension MovieListViewController {
 extension MovieListViewController{
     @objc func buttonBookClicked(_ sender: UIButton){
         // TODO MovieDetailViewController
+        let movie = viewModel.moviesArray[sender.tag]
+        let detailVc = MovieDetailViewController.loadFromNib(movie: movie)
+        self.navigationController?.pushViewController(detailVc, animated: true)
     }
 }
 
