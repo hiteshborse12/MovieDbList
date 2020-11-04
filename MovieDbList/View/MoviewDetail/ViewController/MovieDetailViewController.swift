@@ -21,6 +21,7 @@ class MovieDetailViewController: UIViewController {
     var similarMovieViewModel : SimilarMovieViewModel?
     var movieCastViewModel : MovieCastViewModel?
     var movieReviewViewModel : MovieReviewViewModel?
+    var taskGroup : DispatchGroup?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableview()
@@ -72,10 +73,27 @@ extension MovieDetailViewController {
 // MARK: Get Movie Detail Data
 extension MovieDetailViewController {
     func getMovieDetail(){
+        //Create DispatchGroup to execute MultiTask
+        taskGroup = DispatchGroup()
+        self.showSpinner(onView: self.view)
+        
+        taskGroup?.enter()
         moviewDetailViewModel?.loadMoviewDetail()
+        
+        taskGroup?.enter()
         movieCastViewModel?.loadMovieCastAPI()
+        
+        taskGroup?.enter()
         movieReviewViewModel?.loadMovieReviewAPI()
+        
+        taskGroup?.enter()
         similarMovieViewModel?.loadSimilarMovieAPI()
+        
+        //All tasks are done
+        taskGroup?.notify(queue: .main) {
+            self.removeSpinner()
+            self.taskGroup = nil
+        }
     }
 }
 // MARK: Bind View Model
@@ -88,33 +106,41 @@ extension MovieDetailViewController {
     }
     func bindMoviewDetailViewModel() {
         self.moviewDetailViewModel?.bindMoviewDetailViewModelToController = {
+            self.taskGroup?.leave()
             self.tableview.reloadData()
         }
         self.moviewDetailViewModel?.onErrorHandling = {error in
+            self.taskGroup?.leave()
             CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
         }
     }
     func bindSimilarMovieViewModel(){
         self.similarMovieViewModel?.bindSimilarMovieViewModelToController = {
+            self.taskGroup?.leave()
             self.tableview.reloadData()
         }
         self.similarMovieViewModel?.onErrorHandling = {error in
+            self.taskGroup?.leave()
             CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
         }
     }
     func bindMovieCastViewModel(){
         self.movieCastViewModel?.bindMovieCastViewModelToController = {
+            self.taskGroup?.leave()
             self.tableview.reloadData()
         }
         self.movieCastViewModel?.onErrorHandling = {error in
+            self.taskGroup?.leave()
             CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
         }
     }
     func bindMovieReviewViewModel(){
         self.movieReviewViewModel?.bindMovieReviewViewModelToController = {
+            self.taskGroup?.leave()
             self.tableview.reloadData()
         }
         self.movieReviewViewModel?.onErrorHandling = {error in
+            self.taskGroup?.leave()
             CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
         }
     }
