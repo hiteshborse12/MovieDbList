@@ -60,6 +60,7 @@
 		E93628AA2552A0E400B8C1D4 /* MoviewDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93628A92552A0E400B8C1D4 /* MoviewDetailViewModel.swift */; };
 		E93628AF2552A13B00B8C1D4 /* MoviewDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93628AE2552A13B00B8C1D4 /* MoviewDetailModel.swift */; };
 		E93628B42552A1DB00B8C1D4 /* MoviewDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93628B32552A1DB00B8C1D4 /* MoviewDetailRequest.swift */; };
+		E94516E72552D8A50099C1BA /* MovieCrewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94516E62552D8A50099C1BA /* MovieCrewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		E93628A92552A0E400B8C1D4 /* MoviewDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviewDetailViewModel.swift; sourceTree = "<group>"; };
 		E93628AE2552A13B00B8C1D4 /* MoviewDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviewDetailModel.swift; sourceTree = "<group>"; };
 		E93628B32552A1DB00B8C1D4 /* MoviewDetailRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviewDetailRequest.swift; sourceTree = "<group>"; };
+		E94516E62552D8A50099C1BA /* MovieCrewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCrewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +315,7 @@
 				E91F91CC25517ADB00A5F9A1 /* MovieModel.swift */,
 				E93628AE2552A13B00B8C1D4 /* MoviewDetailModel.swift */,
 				E936289925529BC000B8C1D4 /* MovieCastModel.swift */,
+				E94516E62552D8A50099C1BA /* MovieCrewModel.swift */,
 				E936289A25529BC000B8C1D4 /* MovieReviewModel.swift */,
 			);
 			path = Model;
@@ -547,6 +550,7 @@
 				E91F90EA25512E0200A5F9A1 /* MovieDbList.xcdatamodeld in Sources */,
 				E91F92512551A78E00A5F9A1 /* ReviewsViewController.swift in Sources */,
 				E93628AF2552A13B00B8C1D4 /* MoviewDetailModel.swift in Sources */,
+				E94516E72552D8A50099C1BA /* MovieCrewModel.swift in Sources */,
 				E936289325529BB600B8C1D4 /* MovieReviewViewModel.swift in Sources */,
 				E93628A425529DC100B8C1D4 /* CreditsRequest.swift in Sources */,
 				E91F92302551A6E000A5F9A1 /* CastCrewCollectionViewCell.swift in Sources */,

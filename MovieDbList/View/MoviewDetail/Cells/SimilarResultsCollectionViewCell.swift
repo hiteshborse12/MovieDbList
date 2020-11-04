@@ -12,8 +12,12 @@ class SimilarResultsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var labelMovieName: UILabel!
     @IBOutlet weak var containerView: UIView!
-
-    
+    var movie :MovieModel?{
+        didSet{
+            labelMovieName.text = movie?.title
+            //TODO set imag
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         labelMovieName.textColor = .black

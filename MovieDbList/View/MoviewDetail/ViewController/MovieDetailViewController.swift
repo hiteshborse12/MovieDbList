@@ -16,19 +16,26 @@ class MovieDetailViewController: UIViewController {
     let reviewCellIdentifier = "ReviewTableViewCell"
     let castCellIdentifier = "CollectionsTableViewCell"
     let detailsCellIdentifier = "MovieDeatilHeaderTableViewCell"
-    var moviewDetailViewModel = MoviewDetailViewModel()
+    var similarResultCollectionsTableViewCell:CollectionsTableViewCell?
+    var moviewDetailViewModel : MoviewDetailViewModel?
+    var similarMovieViewModel : SimilarMovieViewModel?
+    var movieCastViewModel : MovieCastViewModel?
+    var movieReviewViewModel : MovieReviewViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableview()
         setUpDisplay()
         bindViewModel()
-        moviewDetailViewModel.loadMoviewDetail()
+        getMovieDetail()
     }
     
     static func loadFromNib(movie: MovieModel) -> MovieDetailViewController{
         let detailObj = MovieDetailViewController(nibName: "MovieDetailViewController",
                                                   bundle: nil)
-        detailObj.moviewDetailViewModel.movie = movie
+        detailObj.moviewDetailViewModel = MoviewDetailViewModel(movie: movie)
+        detailObj.similarMovieViewModel = SimilarMovieViewModel(movieId: movie.id)
+        detailObj.movieCastViewModel = MovieCastViewModel(movieId: movie.id)
+        detailObj.movieReviewViewModel = MovieReviewViewModel(movieId: movie.id)
         return detailObj
     }
 }
@@ -57,15 +64,57 @@ extension MovieDetailViewController {
     }
     
     private func setUpDisplay(){
-        self.title = self.moviewDetailViewModel.movie?.originalTitle ?? "Movie Detail"
+        self.title = self.moviewDetailViewModel?.movie?.title ?? "Movie Detail"
         view.backgroundColor = .backgroundGrey
     }
-    
+}
+
+// MARK: Get Movie Detail Data
+extension MovieDetailViewController {
+    func getMovieDetail(){
+        moviewDetailViewModel?.loadMoviewDetail()
+        movieCastViewModel?.loadMovieCastAPI()
+        movieReviewViewModel?.loadMovieReviewAPI()
+        similarMovieViewModel?.loadSimilarMovieAPI()
+    }
+}
+// MARK: Bind View Model
+extension MovieDetailViewController {
     func bindViewModel(){
-        self.moviewDetailViewModel.bindMoviewDetailViewModelToController = {
+        bindMoviewDetailViewModel()
+        bindSimilarMovieViewModel()
+        bindMovieCastViewModel()
+        bindMovieReviewViewModel()
+    }
+    func bindMoviewDetailViewModel() {
+        self.moviewDetailViewModel?.bindMoviewDetailViewModelToController = {
             self.tableview.reloadData()
         }
-        self.moviewDetailViewModel.onErrorHandling = {error in
+        self.moviewDetailViewModel?.onErrorHandling = {error in
+            CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
+        }
+    }
+    func bindSimilarMovieViewModel(){
+        self.similarMovieViewModel?.bindSimilarMovieViewModelToController = {
+            self.tableview.reloadData()
+        }
+        self.similarMovieViewModel?.onErrorHandling = {error in
+            CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
+        }
+    }
+    func bindMovieCastViewModel(){
+        self.movieCastViewModel?.bindMovieCastViewModelToController = {
+            self.tableview.reloadData()
+        }
+        self.movieCastViewModel?.onErrorHandling = {error in
+            CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
+        }
+    }
+    func bindMovieReviewViewModel(){
+        self.movieReviewViewModel?.bindMovieReviewViewModelToController = {
+            self.tableview.reloadData()
+        }
+        self.movieReviewViewModel?.onErrorHandling = {error in
             CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
         }
     }
@@ -74,7 +123,7 @@ extension MovieDetailViewController {
 // MARK: Button Actions
 extension MovieDetailViewController{
     @objc func buttonViewReviewsClicked(){
-        let reviewVc = ReviewsViewController.loadFromNib()
+        let reviewVc = ReviewsViewController.loadFromNib(movieId: moviewDetailViewModel?.movie?.id)
         self.navigationController?.pushViewController(reviewVc, animated: true)
     }
 }
@@ -86,7 +135,25 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch section {
+        case 0:
+            if moviewDetailViewModel?.isMoviewDetail() ?? false{return 1}
+            return 0
+        case 1:
+            if movieCastViewModel?.numberOfCasts() ?? 0 > 0{return 1}
+            return 0
+        case 2:
+            if movieCastViewModel?.numberOfCrews() ?? 0 > 0{return 1}
+            return 0
+        case 3:
+            if movieReviewViewModel?.numberOfRows() ?? 0 > 0{return 1}
+            return 0
+        case 4:
+            if similarMovieViewModel?.numberOfRows() ?? 0 > 0{return 1}
+            return 0
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -98,27 +165,49 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource{
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: detailsCellIdentifier,
                                                      for: indexPath) as! MovieDeatilHeaderTableViewCell
-            cell.moviewDetailModel = self.moviewDetailViewModel.moviewDetail
+            cell.moviewDetailModel = self.moviewDetailViewModel?.moviewDetail
             cell.selectionStyle = .none
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: castCellIdentifier,
+                                                     for: indexPath) as! CollectionsTableViewCell
+            cell.selectionStyle = .none
+            cell.type = .cast
+            cell.movieCastViewModel = movieCastViewModel
+            cell.reloadCollectionView()
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: castCellIdentifier,
+                                                     for: indexPath) as! CollectionsTableViewCell
+            cell.selectionStyle = .none
+            cell.type = .Crew
+            cell.movieCastViewModel = movieCastViewModel
+            cell.reloadCollectionView()
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: reviewCellIdentifier,
                                                      for: indexPath) as! ReviewTableViewCell
             cell.selectionStyle = .none
             cell.buttonViewAll.addTarget(self, action: #selector(buttonViewReviewsClicked), for: .touchUpInside)
+            if let review = movieReviewViewModel?.moviesReviewArray.first{
+                cell.movieReviewModel = review
+            }
             return cell
         case 4:
+            if let cell = self.similarResultCollectionsTableViewCell{
+                cell.reloadCollectionView()
+                return cell
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: castCellIdentifier,
                                                      for: indexPath) as! CollectionsTableViewCell
             cell.selectionStyle = .none
             cell.type = .similarResult
+            cell.similarMovieViewModel = similarMovieViewModel
+            self.similarResultCollectionsTableViewCell = cell
+            cell.reloadCollectionView()
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: castCellIdentifier,
-                                                     for: indexPath) as! CollectionsTableViewCell
-            cell.selectionStyle = .none
-            cell.type = .castCrew
-            return cell
+            return UITableViewCell()
         }
     }
     

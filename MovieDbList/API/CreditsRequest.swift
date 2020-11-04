@@ -9,9 +9,11 @@ import Foundation
 class CreditsResponse: Codable {
     
     var casts: [MovieCastModel] = []
+    var crews: [MovieCrewModel] = []
     
     enum CodingKeys: String, CodingKey {
         case casts = "cast"
+        case crews = "crew"
     }
     
 }

@@ -15,7 +15,7 @@ class SimilarMovieViewModel {
     var bindSimilarMovieViewModelToController : (() -> ())?
     var onErrorHandling : ((APIError?) -> Void)?
     var movieId:Int?
-    init(movieId:Int) {
+    init(movieId:Int?) {
         self.movieId = movieId
     }
 }

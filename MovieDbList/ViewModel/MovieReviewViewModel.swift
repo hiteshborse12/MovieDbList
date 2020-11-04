@@ -16,7 +16,7 @@ class MovieReviewViewModel {
     var bindMovieReviewViewModelToController : (() -> ())?
     var onErrorHandling : ((APIError?) -> Void)?
     var movieId:Int?
-    init(movieId:Int) {
+    init(movieId:Int?) {
         self.movieId = movieId
     }
 }

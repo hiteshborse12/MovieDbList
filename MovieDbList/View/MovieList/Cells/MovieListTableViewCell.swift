@@ -18,9 +18,16 @@ class MovieListTableViewCell: UITableViewCell {
     
     var movieObj :MovieModel?{
         didSet{
-            self.labelTitle.text = movieObj?.originalTitle ?? ""
-            self.labelReleaseDate.text = movieObj?.releaseDate ?? ""
+            self.labelTitle.text = movieObj?.title ?? ""
             self.labelDescription.text = "\(movieObj?.voteCount ?? 0)  │  Rate: \(movieObj?.voteAverage ?? 0)/10"
+            var dateToDisplay = movieObj?.releaseDate ?? ""
+            if let releaseData = CustomDateFormatter.dateFromString(dateFormat: .yyyyMMddHyphen, dateString: movieObj?.releaseDate ?? ""){
+                dateToDisplay = CustomDateFormatter.stringFromDate(dateFormat: .dateMonthYear,
+                                                                   dateToConvert: releaseData)
+                dateToDisplay = CustomDateFormatter.stringFromDate(dateFormat: .dateMonthYear,
+                                                                   dateToConvert: releaseData)
+            }
+            labelReleaseDate.text = dateToDisplay
             // TODO: Set Image
         }
     }

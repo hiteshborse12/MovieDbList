@@ -17,6 +17,13 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var labelSeparator: UILabel!
     @IBOutlet weak var buttonViewAll: UIButton!
     
+    var movieReviewModel :MovieReviewModel?{
+        didSet{
+            labelUserName.text = movieReviewModel?.author
+            labelReview.text = movieReviewModel?.content
+            imageUser.image = UIImage.init(named: "profile")
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
        setUpDisplay()

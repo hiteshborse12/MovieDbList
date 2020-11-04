@@ -8,7 +8,8 @@
 import UIKit
 
 enum CollectionType {
-    case castCrew
+    case cast
+    case Crew
     case similarResult
 }
 
@@ -19,7 +20,8 @@ class CollectionsTableViewCell: UITableViewCell {
     let similarCellIndetifier = "SimilarResultsCollectionViewCell"
     
     var type: CollectionType?
-    
+    var similarMovieViewModel:SimilarMovieViewModel?
+    var movieCastViewModel:MovieCastViewModel?
     //MARK: IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -41,6 +43,10 @@ extension CollectionsTableViewCell {
         collectionView.register(UINib(nibName: similarCellIndetifier, bundle: nil),
                                 forCellWithReuseIdentifier: similarCellIndetifier)
     }
+    
+    func reloadCollectionView() {
+        self.collectionView.reloadData()
+    }
 }
 
 //MARK: Collection view delegate and datasource methods
@@ -50,18 +56,35 @@ extension CollectionsTableViewCell: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        switch type {
+        case .cast:
+            return movieCastViewModel?.numberOfCasts() ?? 0
+        case .Crew:
+            return movieCastViewModel?.numberOfCrews() ?? 0
+        case .similarResult:
+            return similarMovieViewModel?.numberOfRows() ?? 0
+        default:
+            return 10
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch type {
+        case .cast:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: castCellIndetifier, for: indexPath) as! CastCrewCollectionViewCell
+            cell.cast = movieCastViewModel?.movieCastArray[indexPath.row]
+            return cell
+        case .Crew:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: castCellIndetifier, for: indexPath) as! CastCrewCollectionViewCell
+            cell.crew = movieCastViewModel?.movieCrewArray[indexPath.row]
+            return cell
         case .similarResult:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: similarCellIndetifier, for: indexPath) as! SimilarResultsCollectionViewCell
+            cell.movie = similarMovieViewModel?.moviesArray[indexPath.row]
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: castCellIndetifier, for: indexPath) as! CastCrewCollectionViewCell
-            return cell
+            return UICollectionViewCell()
         }
         
     }
@@ -78,6 +101,16 @@ extension CollectionsTableViewCell: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 0)
+    }
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        switch type {
+        case .similarResult:
+            if similarMovieViewModel?.canLoadNow(index: indexPath.row) ?? false{
+                similarMovieViewModel?.loadSimilarMovieAPI()
+            }
+        default:
+            print(type ?? "")
+        }
     }
 }
 

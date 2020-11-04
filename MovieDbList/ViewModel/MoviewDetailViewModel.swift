@@ -8,16 +8,19 @@
 import Foundation
 class MoviewDetailViewModel {
     var moviewDetail: MoviewDetailModel?
+    var similarMovieViewModel: SimilarMovieViewModel?
     var movie: MovieModel?
     var isLoading:Bool = false
     var bindMoviewDetailViewModelToController : (() -> ())?
     var onErrorHandling : ((APIError?) -> Void)?
+    init(movie:MovieModel?) {
+        self.movie = movie
+    }
 }
 // API call
 extension MoviewDetailViewModel {
     func loadMoviewDetail(){
         isLoading = true
-        
         MoviewDetailRequest(movieId: self.movie?.id).response { [weak self] (result) in
             switch result {
             case .success(let response):
@@ -40,5 +43,13 @@ extension MoviewDetailViewModel{
     func onMoviewDetailRequestError(error: APIError) {
         self.isLoading = false
         self.onErrorHandling?(error)
+    }
+}
+extension MoviewDetailViewModel {
+    func isMoviewDetail()-> Bool {
+        if self.moviewDetail != nil{
+            return true
+        }
+        return false
     }
 }

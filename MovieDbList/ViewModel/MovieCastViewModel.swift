@@ -8,10 +8,11 @@
 import Foundation
 class MovieCastViewModel {
     var movieCastArray: [MovieCastModel] = [MovieCastModel]()
+    var movieCrewArray: [MovieCrewModel] = [MovieCrewModel]()
     var bindMovieCastViewModelToController : (() -> ())?
     var onErrorHandling : ((APIError?) -> Void)?
     var movieId:Int?
-    init(movieId:Int) {
+    init(movieId:Int?) {
         self.movieId = movieId
     }
 }
@@ -35,6 +36,9 @@ extension MovieCastViewModel{
     func onCreditsRequestSuccess(response: CreditsResponse) {
         self.movieCastArray.removeAll()
         self.movieCastArray = response.casts
+        self.movieCrewArray.removeAll()
+        self.movieCrewArray = response.crews
+        
         self.bindMovieCastViewModelToController?()
     }
     func onCreditsRequestError(error: APIError) {
@@ -42,8 +46,11 @@ extension MovieCastViewModel{
     }
 }
 extension MovieCastViewModel {
-    func numberOfRows()-> Int {
+    func numberOfCasts()-> Int {
         return movieCastArray.count
+    }
+    func numberOfCrews()-> Int {
+        return movieCrewArray.count
     }
     func numberOfSections()-> Int {
         return 1

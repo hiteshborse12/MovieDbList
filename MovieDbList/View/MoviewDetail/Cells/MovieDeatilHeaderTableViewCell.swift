@@ -19,6 +19,16 @@ class MovieDeatilHeaderTableViewCell: UITableViewCell {
     
     var moviewDetailModel :MoviewDetailModel?{
         didSet{
+            labelMovieTitle.text = moviewDetailModel?.title
+            var genre = ""
+            for genreText in moviewDetailModel?.genres ?? []{
+                genre.append("\(genreText.name ?? ""), ")
+            }
+            labelGenre.text = genre
+            labelDescription.text = moviewDetailModel?.overview
+            labelRating.text = "\(moviewDetailModel?.voteAverage ?? 0)/10"
+            
+            // Set releaseDate and runtime
             var dateToDisplay = ""
             if let releaseData = CustomDateFormatter.dateFromString(dateFormat: .yyyyMMddHyphen, dateString: moviewDetailModel?.releaseDate ?? ""){
                 dateToDisplay = CustomDateFormatter.stringFromDate(dateFormat: .dateMonthYear,
@@ -28,7 +38,6 @@ class MovieDeatilHeaderTableViewCell: UITableViewCell {
             let tuple  = CommonMethods.minutesToHoursMinutes(minutes: moviewDetailModel?.runtime ?? 0)
             let duration = "\(tuple.hours)h \(tuple.leftMinutes)m"
             labelDateDuration.text = "\(dateToDisplay) • \(duration)"
-            
             //TODO set image and other moviewDetails
         }
     }
