@@ -20,9 +20,9 @@ extension MovieRoute {
     private var baseUrl: String {
         return Constant.MOVIE_DB_BASE_PATH
     }
-    private func apiEndPoint(movieId:String? = nil) -> String {
+    private func apiEndPoint(movieId:Int? = nil) -> String {
         let path = urlPath.count > 0 ?  "/\(urlPath)" : ""
-        let movieid = (movieId != nil)  ?  "/\(movieId ?? "")" : ""
+        let movieid = (movieId != nil)  ?  "/\(movieId ?? 0)" : ""
         return "\(baseUrl)\(movieid)\(path)?api_key=\(Constant.API_KEY)"
     }
     
@@ -45,7 +45,7 @@ extension MovieRoute {
         return URL(string: apiEndPoint())!
     }
     // Return Route with API endpoint
-    func asRoute(movieId:String? = nil) -> Route {
+    func asRoute(movieId:Int? = nil) -> Route {
         switch self {
         case .getNowPlaying:
             return Route.getRoute(path: apiEndPoint())

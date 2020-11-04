@@ -16,18 +16,19 @@ class MovieDetailViewController: UIViewController {
     let reviewCellIdentifier = "ReviewTableViewCell"
     let castCellIdentifier = "CollectionsTableViewCell"
     let detailsCellIdentifier = "MovieDeatilHeaderTableViewCell"
-    var movie:MovieModel?
+    var moviewDetailViewModel = MoviewDetailViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupTableview()
         setUpDisplay()
+        bindViewModel()
+        moviewDetailViewModel.loadMoviewDetail()
     }
     
     static func loadFromNib(movie: MovieModel) -> MovieDetailViewController{
         let detailObj = MovieDetailViewController(nibName: "MovieDetailViewController",
                                                   bundle: nil)
-        detailObj.movie = movie
+        detailObj.moviewDetailViewModel.movie = movie
         return detailObj
     }
 }
@@ -56,8 +57,17 @@ extension MovieDetailViewController {
     }
     
     private func setUpDisplay(){
-        self.title = self.movie?.originalTitle ?? "Movie Detail"
+        self.title = self.moviewDetailViewModel.movie?.originalTitle ?? "Movie Detail"
         view.backgroundColor = .backgroundGrey
+    }
+    
+    func bindViewModel(){
+        self.moviewDetailViewModel.bindMoviewDetailViewModelToController = {
+            self.tableview.reloadData()
+        }
+        self.moviewDetailViewModel.onErrorHandling = {error in
+            CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
+        }
     }
 }
 
@@ -88,6 +98,7 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource{
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: detailsCellIdentifier,
                                                      for: indexPath) as! MovieDeatilHeaderTableViewCell
+            cell.moviewDetailModel = self.moviewDetailViewModel.moviewDetail
             cell.selectionStyle = .none
             return cell
         case 3:

@@ -17,9 +17,21 @@ class MovieDeatilHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var labelRating: UILabel!
     
-    var releaseDateStr = "2020-10-26"
-    var runtime = 106
-    
+    var moviewDetailModel :MoviewDetailModel?{
+        didSet{
+            var dateToDisplay = ""
+            if let releaseData = CustomDateFormatter.dateFromString(dateFormat: .yyyyMMddHyphen, dateString: moviewDetailModel?.releaseDate ?? ""){
+                dateToDisplay = CustomDateFormatter.stringFromDate(dateFormat: .dateMonthYear,
+                                                                   dateToConvert: releaseData)
+            }
+            
+            let tuple  = CommonMethods.minutesToHoursMinutes(minutes: moviewDetailModel?.runtime ?? 0)
+            let duration = "\(tuple.hours)h \(tuple.leftMinutes)m"
+            labelDateDuration.text = "\(dateToDisplay) • \(duration)"
+            
+            //TODO set image and other moviewDetails
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         setDisplayUI()
@@ -35,14 +47,5 @@ class MovieDeatilHeaderTableViewCell: UITableViewCell {
         labelGenre.textColor = .darkGray
         labelGenre.font = .systemFont(ofSize: 11)
         labelDescription.font = .systemFont(ofSize: 13)
-        var dateToDisplay = ""
-        if let releaseData = CustomDateFormatter.dateFromString(dateFormat: .yyyyMMddHyphen, dateString: releaseDateStr){
-            dateToDisplay = CustomDateFormatter.stringFromDate(dateFormat: .dateMonthYear,
-                                                               dateToConvert: releaseData)
-        }
-        
-        let tuple  = CommonMethods.minutesToHoursMinutes(minutes: runtime)
-        let duration = "\(tuple.hours)h \(tuple.leftMinutes)m"
-        labelDateDuration.text = "\(dateToDisplay) • \(duration)"
     }
 }

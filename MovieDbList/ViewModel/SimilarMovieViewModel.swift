@@ -1,53 +1,43 @@
 //
-//  MovieViewModel.swift
+//  SimilarMovieViewModel.swift
 //  MovieDbList
 //
-//  Created by webwerks on 03/11/20.
+//  Created by webwerks on 04/11/20.
 //
 
 import Foundation
-class MovieViewModel {
+class SimilarMovieViewModel {
     var moviesArray: [MovieModel] = [MovieModel]()
     var hasMore:Bool = false
     var isLoading:Bool = false
     var nextRequestPage = 1
     var currentPage = 1
-    var bindMovieViewModelToController : (() -> ())?
+    var bindSimilarMovieViewModelToController : (() -> ())?
     var onErrorHandling : ((APIError?) -> Void)?
+    var movieId:Int?
+    init(movieId:Int) {
+        self.movieId = movieId
+    }
 }
 // API call
-extension MovieViewModel {
-    func loadNowPlaying(){
+extension SimilarMovieViewModel {
+    func loadSimilarMovieAPI(){
         isLoading = true
-        NowPlayingRequest(page: self.nextRequestPage).response { [weak self] (result) in
+        SimilarMoviesRequest(page: self.nextRequestPage, movieId: self.movieId).response { [weak self] (result) in
             switch result {
             case .success(let response):
-                self?.onNowPlayingRequestSuccess(response: response)
+                self?.onSimilarMoviesSuccess(response: response)
                 break
             case .failure(let error):
-                self?.onNowPlayingRequestError(error: error)
-                break
-            }
-        }
-    }
-    func reloadNowPlaying(){
-        isLoading = true
-        self.nextRequestPage = 1
-        NowPlayingRequest(page: self.nextRequestPage).response { [weak self] (result) in
-            switch result {
-            case .success(let response):
-                self?.onNowPlayingRequestSuccess(response: response)
-                break
-            case .failure(let error):
-                self?.onNowPlayingRequestError(error: error)
+                self?.onSimilarMoviesError(error: error)
                 break
             }
         }
     }
 }
 // Send updates to view
-extension MovieViewModel{
-    func onNowPlayingRequestSuccess(response: NowPlayingResponse) {
+extension SimilarMovieViewModel{
+    func onSimilarMoviesSuccess(response: SimilarMoviesResponse) {
         if response.page == 1 {
             self.moviesArray.removeAll()
             self.moviesArray = response.results
@@ -63,14 +53,14 @@ extension MovieViewModel{
             nextRequestPage = response.page + 1
         }
         self.isLoading = false
-        self.bindMovieViewModelToController?()
+        self.bindSimilarMovieViewModelToController?()
     }
-    func onNowPlayingRequestError(error: APIError) {
+    func onSimilarMoviesError(error: APIError) {
         self.isLoading = false
         self.onErrorHandling?(error)
     }
 }
-extension MovieViewModel {
+extension SimilarMovieViewModel {
     func numberOfRows()-> Int {
         return moviesArray.count
     }
