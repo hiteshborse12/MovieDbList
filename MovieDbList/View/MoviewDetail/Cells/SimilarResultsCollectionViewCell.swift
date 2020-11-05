@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 class SimilarResultsCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageMovie: UIImageView!
@@ -14,16 +14,28 @@ class SimilarResultsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var containerView: UIView!
     var movie :MovieModel?{
         didSet{
-            labelMovieName.text = movie?.title
-            //TODO set imag
+            if let name = movie?.title{
+                labelMovieName.text = " \(name) "
+            }else {
+                labelMovieName.text = ""
+            }
+            if let url = movie?.fullPosterPath{
+                imageMovie.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                imageMovie.sd_setImage(with: URL(string: url), placeholderImage: UIImage.init(named: "placeholder"), options: .highPriority, context: [:])
+            }
+            else {
+                imageMovie.image = UIImage.init(named: "placeholder")
+            }
         }
     }
     override func awakeFromNib() {
         super.awakeFromNib()
         labelMovieName.textColor = .black
         labelMovieName.font = .boldSystemFont(ofSize: 15)
+        labelMovieName.backgroundColor = UIColor.purpleTheme.withAlphaComponent(0.40)
         containerView.layer.cornerRadius = 3
-        imageMovie.image = UIImage(named: "placeholder")?.withAlpha(0.8)
+        imageMovie.image = UIImage(named: "placeholder")?.withAlpha(0.7)
+        imageMovie.alpha = 0.80
 
     }
 

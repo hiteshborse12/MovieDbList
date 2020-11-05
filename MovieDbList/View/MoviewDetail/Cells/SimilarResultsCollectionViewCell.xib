@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="180" height="190"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zc-wv-dSi">
-                                <rect key="frame" x="15" y="159.5" width="155" height="20.5"/>
+                                <rect key="frame" x="15" y="159.5" width="8" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -34,7 +34,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Htp-BD-Ozy" firstAttribute="top" secondItem="34B-2y-NPg" secondAttribute="top" id="DgZ-rg-eX4"/>
-                            <constraint firstAttribute="trailing" secondItem="0Zc-wv-dSi" secondAttribute="trailing" constant="10" id="Rv5-0c-iSE"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Zc-wv-dSi" secondAttribute="trailing" constant="10" id="Rv5-0c-iSE"/>
                             <constraint firstAttribute="trailing" secondItem="Htp-BD-Ozy" secondAttribute="trailing" id="W1R-pS-Gky"/>
                             <constraint firstItem="0Zc-wv-dSi" firstAttribute="leading" secondItem="34B-2y-NPg" secondAttribute="leading" constant="15" id="Z6w-WI-Mxy"/>
                             <constraint firstItem="Htp-BD-Ozy" firstAttribute="leading" secondItem="34B-2y-NPg" secondAttribute="leading" id="cgx-hW-26h"/>

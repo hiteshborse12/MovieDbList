@@ -7,6 +7,7 @@
 
 import UIKit
 
+import SDWebImage
 class CastCrewCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageCast: UIImageView!
@@ -14,13 +15,25 @@ class CastCrewCollectionViewCell: UICollectionViewCell {
     var cast :MovieCastModel?{
         didSet{
             labelCastName.text = cast?.name
-            //TODO set imag
+            if let url = cast?.fullProfilePath{
+                imageCast.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                imageCast.sd_setImage(with: URL(string: url), placeholderImage: UIImage.init(named: "placeholder"), options: .highPriority, context: [:])
+            }
+            else {
+                imageCast.image = UIImage.init(named: "placeholder")
+            }
         }
     }
     var crew :MovieCrewModel?{
         didSet{
             labelCastName.text = crew?.name
-            //TODO set imag
+            if let url = crew?.fullProfilePath{
+                imageCast.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                imageCast.sd_setImage(with: URL(string: url), placeholderImage: UIImage.init(named: "placeholder"), options: .highPriority, context: [:])
+            }
+            else {
+                imageCast.image = UIImage.init(named: "placeholder")
+            }
         }
     }
     override func awakeFromNib() {

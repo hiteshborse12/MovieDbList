@@ -44,10 +44,16 @@ class MovieDeatilHeaderTableViewCell: UITableViewCell {
                 imageMovieBanner.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 imageMovieBanner.sd_setImage(with: URL(string: url), placeholderImage: UIImage.init(named: "placeholder"), options: .highPriority, context: [:])
             }
+            else {
+                imageMovieBanner.image = UIImage.init(named: "placeholder")
+            }
             
             if let url = moviewDetailModel?.fullPosterPath{
                 imageMoviePoster.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 imageMoviePoster.sd_setImage(with: URL(string: url), placeholderImage: UIImage.init(named: "placeholder"), options: .highPriority, context: [:])
+            }
+            else {
+                imageMoviePoster.image = UIImage.init(named: "placeholder")
             }
         }
     }
