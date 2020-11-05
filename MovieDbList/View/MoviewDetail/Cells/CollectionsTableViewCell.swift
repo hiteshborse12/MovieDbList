@@ -109,7 +109,7 @@ extension CollectionsTableViewCell: UICollectionViewDelegate, UICollectionViewDa
                 similarMovieViewModel?.loadSimilarMovieAPI()
             }
         default:
-            print(type ?? "")
+            print("")
         }
     }
 }
