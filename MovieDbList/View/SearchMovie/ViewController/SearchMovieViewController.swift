@@ -57,6 +57,7 @@ extension SearchMovieViewController {
         searchBar.delegate = self
         searchBar.tintColor = .backgroundGrey
         view.backgroundColor = .backgroundGrey
+        tableview.backgroundColor = .backgroundGrey
     }
     
     private func bindViewModel(){
@@ -94,7 +95,7 @@ extension SearchMovieViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if searchMovieViewModel?.isRecentSearch ?? false {
+        if searchMovieViewModel?.isShowRecentSearch() ?? false {
             let header = SettingSectionHeader.loadNib()
             return header
         }
@@ -102,7 +103,7 @@ extension SearchMovieViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        if searchMovieViewModel?.isRecentSearch ?? false {
+        if searchMovieViewModel?.isShowRecentSearch() ?? false {
             return 50
         }
         return 0

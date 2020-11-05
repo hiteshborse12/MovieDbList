@@ -32,9 +32,8 @@ class SimilarResultsCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         labelMovieName.textColor = .white
         labelMovieName.font = .boldSystemFont(ofSize: 15)
-        labelMovieName.backgroundColor = UIColor.purpleTheme.withAlphaComponent(0.65)
         containerView.layer.cornerRadius = 3
-        imageMovie.image = UIImage(named: "placeholder")?.withAlpha(0.7)
+        imageMovie.image = UIImage(named: "placeholder")
         imageMovie.alpha = 0.80
 
     }

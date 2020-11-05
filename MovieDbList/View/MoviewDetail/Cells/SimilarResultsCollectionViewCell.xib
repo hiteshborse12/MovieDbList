@@ -24,21 +24,29 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Htp-BD-Ozy">
                                 <rect key="frame" x="0.0" y="0.0" width="180" height="190"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zc-wv-dSi">
-                                <rect key="frame" x="15" y="159.5" width="8" height="20.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kh8-fg-H8c">
+                                <rect key="frame" x="0.0" y="0.0" width="180" height="190"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zc-wv-dSi">
+                                <rect key="frame" x="15" y="159.5" width="155" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Htp-BD-Ozy" firstAttribute="top" secondItem="34B-2y-NPg" secondAttribute="top" id="DgZ-rg-eX4"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Zc-wv-dSi" secondAttribute="trailing" constant="10" id="Rv5-0c-iSE"/>
+                            <constraint firstItem="kh8-fg-H8c" firstAttribute="leading" secondItem="34B-2y-NPg" secondAttribute="leading" id="F6L-SP-jsb"/>
+                            <constraint firstAttribute="trailing" secondItem="0Zc-wv-dSi" secondAttribute="trailing" constant="10" id="Rv5-0c-iSE"/>
+                            <constraint firstAttribute="trailing" secondItem="kh8-fg-H8c" secondAttribute="trailing" id="VGO-m6-Qij"/>
                             <constraint firstAttribute="trailing" secondItem="Htp-BD-Ozy" secondAttribute="trailing" id="W1R-pS-Gky"/>
                             <constraint firstItem="0Zc-wv-dSi" firstAttribute="leading" secondItem="34B-2y-NPg" secondAttribute="leading" constant="15" id="Z6w-WI-Mxy"/>
+                            <constraint firstItem="kh8-fg-H8c" firstAttribute="top" secondItem="34B-2y-NPg" secondAttribute="top" id="b1L-g9-lsK"/>
                             <constraint firstItem="Htp-BD-Ozy" firstAttribute="leading" secondItem="34B-2y-NPg" secondAttribute="leading" id="cgx-hW-26h"/>
                             <constraint firstAttribute="bottom" secondItem="Htp-BD-Ozy" secondAttribute="bottom" id="iLx-rZ-O9o"/>
+                            <constraint firstAttribute="bottom" secondItem="kh8-fg-H8c" secondAttribute="bottom" id="qG0-kC-wMC"/>
                             <constraint firstAttribute="bottom" secondItem="0Zc-wv-dSi" secondAttribute="bottom" constant="10" id="yVA-UI-8Q0"/>
                         </constraints>
                     </view>

@@ -50,4 +50,10 @@ extension SearchMovieViewModel {
     func getMovieForRecentSearch() {
         searchMovieArray = DataBaseManager().getRecentMovie()
     }
+    func isShowRecentSearch()-> Bool {
+        if isRecentSearch && searchMovieArray.count > 0{
+            return true
+        }
+        return false
+    }
 }

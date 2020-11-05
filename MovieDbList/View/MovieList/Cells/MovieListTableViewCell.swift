@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 class MovieListTableViewCell: UITableViewCell {
     
+    //MARK: IBOutlets
     @IBOutlet weak var imagePicture: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelReleaseDate: UILabel!
@@ -17,7 +18,7 @@ class MovieListTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonBook: UIButton!
     @IBOutlet weak var containerView: UIView!
     
-    var movieObj :MovieModel?{
+    var movieObj : MovieModel?{
         didSet{
             self.labelTitle.text = movieObj?.title ?? ""
             self.labelDescription.text = "\(movieObj?.voteCount ?? 0)  │  Rate: \(movieObj?.voteAverage ?? 0)/10"
@@ -36,6 +37,7 @@ class MovieListTableViewCell: UITableViewCell {
             }
         }
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .backgroundGrey

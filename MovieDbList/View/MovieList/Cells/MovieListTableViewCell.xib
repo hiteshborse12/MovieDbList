@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -30,9 +30,9 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cX7-pr-Ine">
-                                <rect key="frame" x="115" y="15" width="175" height="24"/>
+                                <rect key="frame" x="115" y="25" width="175" height="21.5"/>
                                 <color key="tintColor" name="purpleTheme"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -66,34 +66,34 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zrc-Pe-D1R">
-                                <rect key="frame" x="148" y="79" width="142" height="21.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <rect key="frame" x="143" y="86.5" width="147" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vote" translatesAutoresizingMaskIntoConstraints="NO" id="cyp-gL-qIY">
-                                <rect key="frame" x="115" y="77.5" width="25" height="25"/>
+                                <rect key="frame" x="115" y="85" width="20" height="20"/>
                                 <color key="tintColor" name="purpleTheme"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="9eb-Ee-vYk"/>
-                                    <constraint firstAttribute="height" constant="25" id="otC-3B-2Td"/>
+                                    <constraint firstAttribute="width" constant="20" id="9eb-Ee-vYk"/>
+                                    <constraint firstAttribute="height" constant="20" id="otC-3B-2Td"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAd-Lo-EsT">
-                                <rect key="frame" x="145" y="49" width="145" height="20"/>
+                                <rect key="frame" x="140" y="56.5" width="150" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Gzo-Dp-dY8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="date" translatesAutoresizingMaskIntoConstraints="NO" id="rop-to-07n">
-                                <rect key="frame" x="115" y="46.5" width="25" height="25"/>
+                                <rect key="frame" x="115" y="56.5" width="20" height="20"/>
                                 <color key="tintColor" name="purpleTheme"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="1c3-t1-T0D"/>
-                                    <constraint firstAttribute="height" constant="25" id="VKj-ec-8Ud"/>
+                                    <constraint firstAttribute="width" constant="20" id="1c3-t1-T0D"/>
+                                    <constraint firstAttribute="height" constant="20" id="VKj-ec-8Ud"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -104,7 +104,7 @@
                             <constraint firstItem="cyp-gL-qIY" firstAttribute="centerY" secondItem="Zrc-Pe-D1R" secondAttribute="centerY" id="BZq-9j-eBm"/>
                             <constraint firstItem="HKD-fg-1KY" firstAttribute="top" secondItem="EgR-WS-rs5" secondAttribute="bottom" constant="10" id="CWy-ma-H5T"/>
                             <constraint firstItem="HKD-fg-1KY" firstAttribute="leading" secondItem="EgR-WS-rs5" secondAttribute="leading" id="ElC-La-3Gq"/>
-                            <constraint firstItem="cX7-pr-Ine" firstAttribute="top" secondItem="EgR-WS-rs5" secondAttribute="top" id="Kht-Aq-rqn"/>
+                            <constraint firstItem="cX7-pr-Ine" firstAttribute="top" secondItem="EgR-WS-rs5" secondAttribute="top" constant="10" id="Kht-Aq-rqn"/>
                             <constraint firstItem="dAd-Lo-EsT" firstAttribute="leading" secondItem="rop-to-07n" secondAttribute="trailing" constant="5" id="NF9-ww-Zmk"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HKD-fg-1KY" secondAttribute="bottom" priority="750" constant="12" id="U6s-DD-hsZ"/>
                             <constraint firstItem="cyp-gL-qIY" firstAttribute="leading" secondItem="EgR-WS-rs5" secondAttribute="trailing" constant="10" id="amk-qf-Obv"/>
@@ -165,7 +165,7 @@
         <image name="placeholder" width="533" height="800"/>
         <image name="vote" width="64" height="64"/>
         <namedColor name="purpleTheme">
-            <color red="0.31764705882352939" green="0.18431372549019609" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.31799998879432678" green="0.18400000035762787" blue="0.49799999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
