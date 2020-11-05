@@ -16,7 +16,6 @@ class MovieDetailViewController: UIViewController {
     let reviewCellIdentifier = "ReviewTableViewCell"
     let castCellIdentifier = "CollectionsTableViewCell"
     let detailsCellIdentifier = "MovieDeatilHeaderTableViewCell"
-    var similarResultCollectionsTableViewCell:CollectionsTableViewCell?
     var moviewDetailViewModel : MoviewDetailViewModel?
     var similarMovieViewModel : SimilarMovieViewModel?
     var movieCastViewModel : MovieCastViewModel?
@@ -217,19 +216,11 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource{
             }
             return cell
         case 4:
-            if let cell = self.similarResultCollectionsTableViewCell{
-                cell.type = .similarResult
-                cell.similarMovieViewModel = similarMovieViewModel
-                self.similarResultCollectionsTableViewCell = cell
-                cell.reloadCollectionView()
-                return cell
-            }
             let cell = tableView.dequeueReusableCell(withIdentifier: castCellIdentifier,
                                                      for: indexPath) as! CollectionsTableViewCell
             cell.selectionStyle = .none
             cell.type = .similarResult
             cell.similarMovieViewModel = similarMovieViewModel
-            self.similarResultCollectionsTableViewCell = cell
             cell.reloadCollectionView()
             return cell
         default:
