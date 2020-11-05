@@ -218,6 +218,9 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource{
             return cell
         case 4:
             if let cell = self.similarResultCollectionsTableViewCell{
+                cell.type = .similarResult
+                cell.similarMovieViewModel = similarMovieViewModel
+                self.similarResultCollectionsTableViewCell = cell
                 cell.reloadCollectionView()
                 return cell
             }

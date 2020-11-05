@@ -15,7 +15,7 @@ class SimilarResultsCollectionViewCell: UICollectionViewCell {
     var movie :MovieModel?{
         didSet{
             if let name = movie?.title{
-                labelMovieName.text = " \(name) "
+                labelMovieName.text = "\(name) "
             }else {
                 labelMovieName.text = ""
             }
@@ -30,9 +30,9 @@ class SimilarResultsCollectionViewCell: UICollectionViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        labelMovieName.textColor = .black
+        labelMovieName.textColor = .white
         labelMovieName.font = .boldSystemFont(ofSize: 15)
-        labelMovieName.backgroundColor = UIColor.purpleTheme.withAlphaComponent(0.40)
+        labelMovieName.backgroundColor = UIColor.purpleTheme.withAlphaComponent(0.65)
         containerView.layer.cornerRadius = 3
         imageMovie.image = UIImage(named: "placeholder")?.withAlpha(0.7)
         imageMovie.alpha = 0.80

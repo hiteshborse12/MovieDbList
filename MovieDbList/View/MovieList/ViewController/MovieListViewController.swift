@@ -51,15 +51,17 @@ extension MovieListViewController {
     
     private func bindViewModel(){
         self.viewModel.bindMovieViewModelToController = {
-            print(self.viewModel.numberOfRows())
+            self.removeSpinner()
             self.tableview.reloadData()
         }
         self.viewModel.onErrorHandling = {error in
+            self.removeSpinner()
             CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
         }
     }
     
     private func getMovies() {
+        self.showSpinner(onView: self.view)
         viewModel.loadNowPlaying()
     }
     // Goto SearchMovieViewController
