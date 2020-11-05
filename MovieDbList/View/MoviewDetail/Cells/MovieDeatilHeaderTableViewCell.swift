@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 class MovieDeatilHeaderTableViewCell: UITableViewCell {
     
     //MARK: IBOutlets
@@ -39,6 +39,10 @@ class MovieDeatilHeaderTableViewCell: UITableViewCell {
             let duration = "\(tuple.hours)h \(tuple.leftMinutes)m"
             labelDateDuration.text = "\(dateToDisplay) • \(duration)"
             //TODO set image and other moviewDetails
+            if let url = moviewDetailModel?.fullBackdropPath{
+                imageMovieBanner.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                imageMovieBanner.sd_setImage(with: URL(string: url), placeholderImage: UIImage.init(named: "placeholder"), options: .highPriority, context: [:])
+            }
         }
     }
     override func awakeFromNib() {

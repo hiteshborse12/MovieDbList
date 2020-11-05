@@ -24,6 +24,7 @@ class SearchMovieViewController: UIViewController {
         setupTableview()
         setUpDisplay()
         bindViewModel()
+        getRecentSearchMovie()
     }
     static func loadFromNib(movieViewModel:MovieViewModel?) -> SearchMovieViewController{
         let vc = SearchMovieViewController(nibName: "SearchMovieViewController",
@@ -36,7 +37,7 @@ class SearchMovieViewController: UIViewController {
 // MARK: Custom methods
 extension SearchMovieViewController {
     
-    func setupTableview() {
+    private func setupTableview() {
         
         tableview.backgroundColor = .backgroundGrey
         tableview.delegate = self
@@ -47,6 +48,9 @@ extension SearchMovieViewController {
         tableview.register(UINib(nibName: cellIdentifier,
                                  bundle: nil ),
                            forCellReuseIdentifier: cellIdentifier)
+    }
+    private func getRecentSearchMovie() {
+        searchMovieViewModel?.getMovieForRecentSearch()
     }
     
     private func setUpDisplay(){
@@ -102,6 +106,13 @@ extension SearchMovieViewController: UITableViewDelegate, UITableViewDataSource{
             return 50
         }
         return 0
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let movie = searchMovieViewModel?.searchMovieArray[indexPath.row]{
+            searchMovieViewModel?.savMovieForRecentSearch(movie: movie)
+            let detailVc = MovieDetailViewController.loadFromNib(movie: movie)
+            self.navigationController?.pushViewController(detailVc, animated: true)
+        }
     }
 }
 

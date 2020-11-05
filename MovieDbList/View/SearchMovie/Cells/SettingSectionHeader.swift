@@ -17,7 +17,7 @@ class SettingSectionHeader: UIView {
 
     override func awakeFromNib() {
         self.backgroundColor = .backgroundGrey
-        labelheader.textColor = .lightGray
+        labelheader.textColor = .purpleTheme
         labelheader.font = .boldSystemFont(ofSize: 14)
     }
 }

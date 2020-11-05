@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieCastModel : Codable {
+struct MovieCastModel : Codable {
     
     let castId : Int?
     let character : String?
@@ -36,7 +36,7 @@ class MovieCastModel : Codable {
         case profilePath = "profile_path"
     }
     
-    required init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         castId = try values.decodeIfPresent(Int.self, forKey: .castId)
         character = try values.decodeIfPresent(String.self, forKey: .character)

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MoviewDetailModel: Codable {
+struct MoviewDetailModel: Codable {
     
     let adult : Bool?
     let backdropPath : String?
@@ -34,6 +34,21 @@ class MoviewDetailModel: Codable {
     let video : Bool?
     let voteAverage : Float?
     let voteCount : Int?
+    // get Image Full path
+    var fullPosterPath: String? {
+        if let path = self.posterPath {
+            return "\(Constant.MOVIE_DB_IMAGE_BASE_PATH)\(path)"
+        } else{
+            return nil
+        }
+    }
+    var fullBackdropPath: String? {
+        if let path = self.backdropPath {
+            return "\(Constant.MOVIE_DB_IMAGE_BASE_PATH)\(path)"
+        } else{
+            return nil
+        }
+    }
     enum CodingKeys: String, CodingKey {
             case adult = "adult"
             case backdropPath = "backdrop_path"
@@ -61,7 +76,7 @@ class MoviewDetailModel: Codable {
             case voteCount = "vote_count"
     }
 
-    required init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
             let values = try decoder.container(keyedBy: CodingKeys.self)
             adult = try values.decodeIfPresent(Bool.self, forKey: .adult)
             backdropPath = try values.decodeIfPresent(String.self, forKey: .backdropPath)

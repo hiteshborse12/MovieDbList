@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieReviewModel : Codable {
+struct MovieReviewModel : Codable {
 
         let author : String?
         let content : String?
@@ -21,7 +21,7 @@ class MovieReviewModel : Codable {
                 case url = "url"
         }
     
-    required init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
                 let values = try decoder.container(keyedBy: CodingKeys.self)
                 author = try values.decodeIfPresent(String.self, forKey: .author)
                 content = try values.decodeIfPresent(String.self, forKey: .content)

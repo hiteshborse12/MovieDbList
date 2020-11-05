@@ -14,4 +14,5 @@ class Constant {
     static let MOVIE_DB_BASE_PATH = "https://api.themoviedb.org/3/movie"
     static let MOVIE_DB_IMAGE_BASE_PATH = "https://image.tmdb.org/t/p/original"
     static let API_KEY = "c5f28957ed0174811a928be9c3b3f339"
+    static let RECENT_MAXIMUM = 5
 }

@@ -16,6 +16,7 @@ class SeartchTableViewCell: UITableViewCell {
     var movieObj:MovieModel?{
         didSet{
             self.labelTitle.text = movieObj?.title
+            self.layoutIfNeeded()
         // TODO: Assign the display values here
         }
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieCrewModel : Codable {
+struct MovieCrewModel : Codable {
     
     let creditId : String?
     let department : String?
@@ -34,7 +34,7 @@ class MovieCrewModel : Codable {
         case profilePath = "profile_path"
     }
     
-    required init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         creditId = try values.decodeIfPresent(String.self, forKey: .creditId)
         department = try values.decodeIfPresent(String.self, forKey: .department)

@@ -22,6 +22,7 @@ extension SearchMovieViewModel {
         if text.trimmingCharacters(in: .whitespacesAndNewlines).count <= 0{
             //Get past saved movie list
             isRecentSearch = true
+            getMovieForRecentSearch()
         }else {
             isRecentSearch = false
             // Search for movies in the movie list
@@ -42,5 +43,11 @@ extension SearchMovieViewModel {
     }
     func numberOfSections()-> Int {
         return 1
+    }
+    func savMovieForRecentSearch(movie:MovieModel) {
+        DataBaseManager().saveNewsMovie(movie: movie)
+    }
+    func getMovieForRecentSearch() {
+        searchMovieArray = DataBaseManager().getRecentMovie()
     }
 }

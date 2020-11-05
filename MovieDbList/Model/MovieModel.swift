@@ -8,22 +8,22 @@
 import Foundation
 import UIKit
 
-class MovieModel: Codable {
+struct MovieModel: Codable {
     
-    let adult : Bool?
-    let backdropPath : String?
-    let genreIds : [Int]?
-    let id : Int?
-    let originalLanguage : String?
-    let originalTitle : String?
-    let overview : String?
-    let popularity : Float?
-    let posterPath : String?
-    let releaseDate : String?
-    let title : String?
-    let video : Bool?
-    let voteAverage : Float?
-    let voteCount : Int?
+    var adult : Bool?
+    var backdropPath : String?
+    var genreIds : [Int]?
+    var id : Int?
+    var originalLanguage : String?
+    var originalTitle : String?
+    var overview : String?
+    var popularity : Float?
+    var posterPath : String?
+    var releaseDate : String?
+    var title : String?
+    var video : Bool?
+    var voteAverage : Float?
+    var voteCount : Int?
     // get Image Full path
     var fullPosterPath: String? {
         if let path = self.posterPath {
@@ -48,7 +48,7 @@ class MovieModel: Codable {
             case voteAverage = "vote_average"
             case voteCount = "vote_count"
     }
-    required init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
             let values = try decoder.container(keyedBy: CodingKeys.self)
             adult = try values.decodeIfPresent(Bool.self, forKey: .adult)
             backdropPath = try values.decodeIfPresent(String.self, forKey: .backdropPath)
@@ -64,5 +64,17 @@ class MovieModel: Codable {
             video = try values.decodeIfPresent(Bool.self, forKey: .video)
             voteAverage = try values.decodeIfPresent(Float.self, forKey: .voteAverage)
             voteCount = try values.decodeIfPresent(Int.self, forKey: .voteCount)
+    }
+    // Init from core data object
+    init(from movie: Movie) {
+        voteCount = movie.voteCount as? Int
+        id = movie.id as? Int
+        voteAverage = movie.voteAverage
+        title = movie.title
+        posterPath = movie.posterPath
+        originalTitle = movie.originalTitle
+        backdropPath = movie.backdropPath
+        overview = movie.overview
+        releaseDate = movie.releaseDate
     }
 }
