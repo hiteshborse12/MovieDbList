@@ -65,7 +65,7 @@ extension MovieDetailViewController {
     }
     
     private func setUpDisplay(){
-        self.title = self.moviewDetailViewModel?.movie?.title ?? "Movie Detail"
+        self.title = "Movie Detail"
         view.backgroundColor = .backgroundGrey
     }
 }
@@ -121,7 +121,6 @@ extension MovieDetailViewController {
         }
         self.similarMovieViewModel?.onErrorHandling = {error in
             self.taskGroup?.leave()
-            CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
         }
     }
     func bindMovieCastViewModel(){
@@ -131,7 +130,6 @@ extension MovieDetailViewController {
         }
         self.movieCastViewModel?.onErrorHandling = {error in
             self.taskGroup?.leave()
-            CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
         }
     }
     func bindMovieReviewViewModel(){
@@ -141,7 +139,6 @@ extension MovieDetailViewController {
         }
         self.movieReviewViewModel?.onErrorHandling = {error in
             self.taskGroup?.leave()
-            CommonMethods.showToast(messsage: error?.description ?? "", view: self.view)
         }
     }
 }

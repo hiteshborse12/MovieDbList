@@ -11,6 +11,7 @@ class MovieDeatilHeaderTableViewCell: UITableViewCell {
     
     //MARK: IBOutlets
     @IBOutlet weak var imageMovieBanner: UIImageView!
+    @IBOutlet weak var imageMoviePoster: UIImageView!
     @IBOutlet weak var labelMovieTitle: UILabel!
     @IBOutlet weak var labelDateDuration: UILabel!
     @IBOutlet weak var labelGenre: UILabel!
@@ -42,6 +43,11 @@ class MovieDeatilHeaderTableViewCell: UITableViewCell {
             if let url = moviewDetailModel?.fullBackdropPath{
                 imageMovieBanner.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 imageMovieBanner.sd_setImage(with: URL(string: url), placeholderImage: UIImage.init(named: "placeholder"), options: .highPriority, context: [:])
+            }
+            
+            if let url = moviewDetailModel?.fullPosterPath{
+                imageMoviePoster.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                imageMoviePoster.sd_setImage(with: URL(string: url), placeholderImage: UIImage.init(named: "placeholder"), options: .highPriority, context: [:])
             }
         }
     }
