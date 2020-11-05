@@ -49,7 +49,7 @@ extension MovieListViewController {
                            forCellReuseIdentifier: cellIdentifier)
     }
     
-    func bindViewModel(){
+    private func bindViewModel(){
         self.viewModel.bindMovieViewModelToController = {
             print(self.viewModel.numberOfRows())
             self.tableview.reloadData()
@@ -59,12 +59,13 @@ extension MovieListViewController {
         }
     }
     
-    func getMovies() {
+    private func getMovies() {
         viewModel.loadNowPlaying()
     }
     // Goto SearchMovieViewController
     @objc func buttonSearchClicked() {
-        //TODO SearchMovieViewController
+        let searchVc = SearchMovieViewController.loadFromNib(movieViewModel: self.viewModel)
+        self.navigationController?.pushViewController(searchVc, animated: true)
     }
 }
 

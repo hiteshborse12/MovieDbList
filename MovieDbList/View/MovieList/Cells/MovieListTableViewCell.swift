@@ -24,8 +24,6 @@ class MovieListTableViewCell: UITableViewCell {
             if let releaseData = CustomDateFormatter.dateFromString(dateFormat: .yyyyMMddHyphen, dateString: movieObj?.releaseDate ?? ""){
                 dateToDisplay = CustomDateFormatter.stringFromDate(dateFormat: .dateMonthYear,
                                                                    dateToConvert: releaseData)
-                dateToDisplay = CustomDateFormatter.stringFromDate(dateFormat: .dateMonthYear,
-                                                                   dateToConvert: releaseData)
             }
             labelReleaseDate.text = dateToDisplay
             // TODO: Set Image
