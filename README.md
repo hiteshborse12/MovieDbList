@@ -4,6 +4,8 @@ iOS Application using [TMDB API](https://www.themoviedb.org/) in Swift 5 with MV
 
 ## Screenshot 
 ![alt text](https://github.com/hiteshborse12/MovieDbList/blob/master/screenshot.png)
+![alt text](https://github.com/hiteshborse12/MovieDbList/blob/master/1.png)
+![alt text](https://github.com/hiteshborse12/MovieDbList/blob/master/2.png)
 
 ## Minimum Requirements
 - Supports iOS 11 and above
